@@ -1,0 +1,3 @@
+module ObjectPubSub
+  VERSION = "1.0.0"
+end
