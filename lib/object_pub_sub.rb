@@ -29,9 +29,9 @@ module ObjectPubSub
         @subscribers << callback_pair
       end
 
-      def publish_event(data = nil)
+      def publish_event(*data)
         @subscribers.each do |subscriber, callback_method|
-          subscriber.send(callback_method, data)
+          subscriber.send(callback_method, *data)
         end
       end
     end
@@ -46,8 +46,8 @@ module ObjectPubSub
       end
     end
 
-    def publish_event(event_name, data = nil)
-      subscriber_list_for(event_name).publish_event(data)
+    def publish_event(event_name, *data)
+      subscriber_list_for(event_name).publish_event(*data)
     end
 
     private

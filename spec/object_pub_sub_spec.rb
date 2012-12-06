@@ -77,6 +77,13 @@ describe ObjectPubSub do
       subject.publish_event(:event_a, :some_data)
     end
 
+    it "can publish multiple data arguments along with an event" do
+      subject.add_subscriber(subscriber, :event_a)
+
+      subscriber.should_receive(:event_a).with(:some_data, :some_more_data)
+      subject.publish_event(:event_a, :some_data, :some_more_data)
+    end
+
     it "allows the subscriber to specify a custom callback method for some events" do
       subject.add_subscriber(subscriber, :event_b, :event_a => :handle_event_a)
 
